@@ -22,8 +22,19 @@ def all():
     return render_template('donations.jinja2', donations=donations)
 
 
+@app.route('/add/')
+def not_yet_implemented(donor_name=None):
+    return '<h2>Not yet implemented</h2>'
+
+
 @app.route('/donations/<donor_name>')
 def single_donor(donor_name):
+    donations = Donation().select().join(Donor).where(Donor.name == donor_name)
+    return render_template('donations.jinja2', donations=donations)
+
+
+@app.route('/showalice/')
+def show_alice(donor_name="Alice"):
     donations = Donation().select().join(Donor).where(Donor.name == donor_name)
     return render_template('donations.jinja2', donations=donations)
 
